@@ -49,3 +49,4 @@ services:
 
 volumes:
   mongodb_data:
+# docker stop $(docker ps | grep flask-mongo- | awk '{print $1}')
