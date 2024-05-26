@@ -16,11 +16,9 @@ services:
     image: mongo:latest
     container_name: flask-mongo-db
     restart: always
-    hostname: test_mongodb
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_DATABASE: animal_db
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass
     volumes:
@@ -49,4 +47,7 @@ services:
 
 volumes:
   mongodb_data:
+
+# Important Commands
+# docker run -d -p 27017:27017 --restart always -v mongodb_data:/data/db --name=flask-mongo-db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=pass mongo:latest
 # docker stop $(docker ps | grep flask-mongo- | awk '{print $1}')

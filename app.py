@@ -1,11 +1,22 @@
 from flask import Flask, jsonify
-from routes import bp_routes
+from routes.routes import bp_routes
+# from flask_migrate import Migrate
+# from models.yt_scrap import db
 
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+    # app.config.from_object('config')
+    # db.init_app(app)  # Initializing the database
+    return app
+
+app = create_app()  # Creating the app
 
 # Registering the blueprint
 app.register_blueprint(bp_routes)
 
+# Initializing the migration
+# migrate = Migrate(app, db)
 
 
 
