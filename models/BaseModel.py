@@ -33,14 +33,14 @@ class BaseModel:
         else:
             return None
 
-    def update(self, search, data, update_all=False):
+    def update(self, filter, data, update_all=False):
         if update_all:
-            return db[self.collection_name].update_many(search, {'$set': data}).modified_count
+            return db[self.collection_name].update_many(filter, {'$set': data}).modified_count
         else:
-            return db[self.collection_name].update_one(search, {'$set': data}).modified_count
+            return db[self.collection_name].update_one(filter, {'$set': data}).modified_count
 
     def get_all(self, limit=0, skip=0):
-        data = db[self.collection_name].find()
+        data = db[self.collection_name].find().sort('_id',-1)
         if limit > 0:
             data = data.limit(limit)
         if skip > 0:
@@ -53,8 +53,8 @@ class BaseModel:
 
         return return_data
 
-    def delete(self, search):
-        return db[self.collection_name].delete_many(search).deleted_count
+    def delete(self, filter):
+        return db[self.collection_name].delete_many(filter).deleted_count
 
     def find_all(self, filter, skip=0, limit=0):
         data = db[self.collection_name].find(filter)

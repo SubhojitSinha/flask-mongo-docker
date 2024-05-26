@@ -34,3 +34,19 @@ def update_name(id, name):
     account = Account()
     data    = account.update({"_id": ObjectId(id)}, {'name': name})
     return str(data)
+
+def delete_doc(id):
+    account = Account()
+    data    = account.delete({"_id": ObjectId(id)})
+    # data    = account.delete({"name": "Subhojit"})
+    return str(data)
+
+def count_all():
+    account = Account()
+    data    = account.count({"name": "Avijit"})
+    return str(data)
+
+def distint_by_field(field):
+    account = Account()
+    data    = account.distinct(field)
+    return str(data)
